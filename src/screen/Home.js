@@ -5,7 +5,7 @@ export class Home extends Component {
   render() {
     return (
       <View>
-        <Text> Tadaaa.... Welcome to home page </Text>
+        <Text> Tadaaa...... Welcome to home page </Text>
       </View>
     );
   }

@@ -67,7 +67,6 @@ export default class SignIn extends Component {
   }
 
   render() {
-    //console.log('emailvalid: ' + this.state.isMailValid);
     return (
       <SafeAreaView>
         <KeyboardAvoidingView behavior='position' style={styles.container}>
