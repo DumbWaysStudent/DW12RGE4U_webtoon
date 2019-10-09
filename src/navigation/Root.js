@@ -2,7 +2,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Login from './../screen/Login';
-import Home from './../screen/Home';
+import TabNavigation from '../navigation/TabNavigation';
 
 
 const Root = createStackNavigator({
@@ -13,7 +13,7 @@ const Root = createStackNavigator({
     }),
   },
   Home: {
-    screen: Home,
+    screen: TabNavigation,
     navigationOptions: () => ({
       header: null
     }),
