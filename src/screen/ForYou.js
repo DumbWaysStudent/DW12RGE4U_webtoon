@@ -22,7 +22,7 @@ const banners = [{
   url: 'https://vignette.wikia.nocookie.net/webtoon/images/d/d6/SAMPUL_T_BOSS.jpg/revision/latest?cb=20190105104612&path-prefix=id'
 }, {
   title: 'Kimetsu No Yaiba',
-  url: 'https://wallpapercave.com/wp/wp4317866.jpg'
+  url: 'https://i.pinimg.com/originals/96/89/7b/96897b21e4e5becae04e990f17b658ec.jpg'
 }];
 
 export class ForYou extends Component {
@@ -60,7 +60,7 @@ export class ForYou extends Component {
   renderFavorite(item) {
     return (
       <View style={styles.favContentStyle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
           <Image source={{ uri: item.url }} style={styles.favImgStyle} />
         </TouchableOpacity>
         <Text>{item.title}</Text>
