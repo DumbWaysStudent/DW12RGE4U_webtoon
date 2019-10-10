@@ -41,6 +41,6 @@ const Root = createStackNavigator({
         <Icon name='share-alt' size={25} /></TouchableOpacity>,
     })
   }
-}, { initialRouteName: 'Login' });
+}, { initialRouteName: 'Home' });
 
 export default createAppContainer(Root);
