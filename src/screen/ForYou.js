@@ -1,29 +1,10 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, FlatList, Image } from 'react-native';
+import { View, TouchableOpacity, FlatList, Image, SafeAreaView } from 'react-native';
 import { Text, Item, Input } from 'native-base';
 import Slideshow from 'react-native-image-slider-show';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
-const banners = [{
-  title: 'The Secret of ..',
-  url: 'https://akcdn.detik.net.id/community/media/visual/2019/04/03/dac43146-7dd4-49f4-89ca-d81f57b070fc.jpeg?w=770&q=90'
-}, {
-  title: 'Pasutri Gaje',
-  url: 'https://swebtoon-phinf.pstatic.net/20171202_17/1512140898074KBA7B_JPEG/thumb_ipad.jpg'
-}, {
-  title: 'Young Mom',
-  url: 'https://cdn.idntimes.com/content-images/community/2019/03/opera-snapshot-2019-03-10-190819-wwwwebtoonscom-aa64078ba943e7895194e96f853d4d20.png'
-}, {
-  title: 'Study Group',
-  url: 'https://swebtoon-phinf.pstatic.net/20190502_128/1556776788182u0tYR_JPEG/thumb_ipad.jpg'
-}, {
-  title: 'The Boss',
-  url: 'https://vignette.wikia.nocookie.net/webtoon/images/d/d6/SAMPUL_T_BOSS.jpg/revision/latest?cb=20190105104612&path-prefix=id'
-}, {
-  title: 'Kimetsu No Yaiba',
-  url: 'https://i.pinimg.com/originals/96/89/7b/96897b21e4e5becae04e990f17b658ec.jpg'
-}];
+import { banners } from '../components/Link';
 
 export class ForYou extends Component {
   constructor(props) {
@@ -86,7 +67,7 @@ export class ForYou extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Item regular style={styles.containSearchStyle}>
           <Input style={styles.searchStyle} />
           <TouchableOpacity>
@@ -123,7 +104,7 @@ export class ForYou extends Component {
           />
         </View>
 
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -203,7 +184,7 @@ const styles = {
     textAlign: 'center',
   },
   slideShow: {
-    marginTop: 12,
+    marginTop: 10,
     borderWidth: 2,
     borderRadius: 2,
     marginLeft: 2
