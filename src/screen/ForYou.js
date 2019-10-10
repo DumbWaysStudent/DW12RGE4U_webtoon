@@ -52,7 +52,7 @@ export class ForYou extends Component {
   renderAll(item) {
     return (
       <View style={styles.allContentStyle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
           <Image source={{ uri: item.url }} style={styles.allImageStyle} />
         </TouchableOpacity>
         <View style={styles.allTitle}>
