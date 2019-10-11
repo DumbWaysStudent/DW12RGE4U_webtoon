@@ -12,14 +12,14 @@ function elevationShadowStyle(elevation) {
   };
 }
 
-const Button2 = ({ onPress, children, styling, disabled }) => {
+const Button2 = ({ onPress, children, styling, disabled, buttonText }) => {
   return (
     <TouchableOpacity
       style={[styles.buttonStyle, styling]}
       onPress={onPress}
       disabled={disabled}
     >
-      <Text style={styles.titleButton}>{children}</Text>
+      <Text style={[styles.titleButton, buttonText]}>{children}</Text>
     </TouchableOpacity>
   );
 };
@@ -29,15 +29,15 @@ const styles = StyleSheet.create({
   buttonStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 5,
+    borderRadius: 3,
     backgroundColor: 'white',
-    width: 300,
-    alignSelf: 'center',
+    width: null,
     borderRightWidth: 4,
     borderBottomWidth: 4,
     borderTopWidth: 2,
     borderLeftWidth: 2,
-    elevation: 10
+    elevation: 15,
+    marginHorizontal: 30,
   },
   titleButton: {
     fontSize: 21,
