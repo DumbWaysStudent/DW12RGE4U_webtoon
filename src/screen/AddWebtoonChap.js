@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     flex: 2
   },
   headerBody: {
-    //paddingLeft: 10
     flex: 6
   },
   headerRight: {
