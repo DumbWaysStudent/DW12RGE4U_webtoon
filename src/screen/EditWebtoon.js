@@ -7,7 +7,15 @@ import Button from '../components/Button2';
 
 import { listChapter } from '../components/Link';
 
-class AddWebtoonChap extends Component {
+class EditWebtoon extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+       inputTitle: this.props.navigation.getParam('title')
+    };
+  }
+  
 
   renderEp(item) {
     return (
@@ -16,8 +24,8 @@ class AddWebtoonChap extends Component {
           <Image source={{ uri: item.url }} style={styles.imgStyle} />
         </TouchableOpacity>
         <View style={styles.imgTitleStyle}>
-          <Text>{item.id}. chapter.png</Text>
-          <Button styling={styles.imgButton} buttonText={styles.imgButtonText}>Delete</Button>
+          <Text>{item.chap}</Text>
+          <Text style={styles.imgTitleStyleCount}>{item.id} Oktober 2019</Text>
         </View>
       </View>
     );
@@ -33,7 +41,7 @@ class AddWebtoonChap extends Component {
             </TouchableOpacity>
           </Left>
           <Body style={styles.headerBody}>
-            <Title>Create Chapter</Title>
+            <Title>Edit Webtoon</Title>
           </Body>
           <Right style={styles.headerRight}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
@@ -42,14 +50,17 @@ class AddWebtoonChap extends Component {
           </Right>
         </Header>
         <View style={styles.contentAdd}>
-          <Title style={styles.titleSearch}>Name</Title>
+          <Title style={styles.titleSearch}>Title</Title>
           <Item regular style={styles.containSearchStyle}>
-            <Input />
+            <Input  
+              onChangeText={(text) => this.setState({ inputTitle: text })}
+              value={this.state.inputTitle}
+            />
           </Item>
         </View>
 
         <View style={styles.chapterContent}>
-          <Title style={styles.chapterTitle}>Add Images</Title>
+          <Title style={styles.chapterTitle}>Chapter</Title>
           <FlatList
             showsVerticalScrollIndicator={false}
             data={listChapter}
@@ -57,16 +68,17 @@ class AddWebtoonChap extends Component {
             keyExtractor={item => item.title}
           />
         </View>
-        <Button styling={styles.buttonStyle}>
-          + Image
+        <Button styling={styles.buttonStyle} onPress={() => this.props.navigation.navigate('AddWebtoonChap')}>
+          + Add Episode
         </Button>
-
-
+        <Button styling={[styles.buttonStyle, styles.redButton]} buttonText={styles.redButtonText} >
+          Delete Webtoon
+        </Button>
       </View>
     );
   }
 }
-export default AddWebtoonChap;
+export default EditWebtoon;
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -77,7 +89,6 @@ const styles = StyleSheet.create({
     flex: 2
   },
   headerBody: {
-    //paddingLeft: 10
     flex: 6
   },
   headerRight: {
@@ -130,22 +141,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginBottom: 14
   },
-  imgButtonText: {
+  imgTitleStyleCount: {
     fontSize: 12,
-    paddingVertical: 2,
-    color: '#fff',
-    fontWeight: 'bold'
-  },
-  imgButton: {
-    width: 100,
-    backgroundColor: 'tomato',
-    marginLeft: 2
+    color: 'gray'
   },
   chapterTitle: {
     marginBottom: 5,
-    marginLeft: 3,
+    marginLeft: 3
   },
   buttonStyle: {
     marginTop: 20,
+  },
+  redButton: {
+    backgroundColor: 'tomato',
+  },
+  redButtonText: {
+    color: '#fff',
+    fontWeight: 'bold'
   }
 });

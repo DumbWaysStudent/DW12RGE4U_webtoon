@@ -16,7 +16,7 @@ class AddWebtoon extends Component {
           <Image source={{ uri: item.url }} style={styles.imgStyle} />
         </TouchableOpacity>
         <View style={styles.imgTitleStyle}>
-          <Text>{item.title}</Text>
+          <Text>{item.chap}</Text>
           <Text style={styles.imgTitleStyleCount}>{item.id} Oktober 2019</Text>
         </View>
       </View>
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     flex: 2
   },
   headerBody: {
-    //paddingLeft: 10
     flex: 6
   },
   headerRight: {

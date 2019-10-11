@@ -9,7 +9,7 @@ class MyWebtoon extends Component {
   renderAll(item) {
     return (
       <View style={styles.contentStyle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('EditWebtoon', {title: item.title })}>
           <Image source={{ uri: item.url }} style={styles.imgStyle} />
         </TouchableOpacity>
         <View style={styles.titleStyle}>

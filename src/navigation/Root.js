@@ -12,6 +12,7 @@ import EditProfile from '../screen/EditProfile';
 import MyWebtoon from '../screen/MyWebtoon';
 import AddWebtoon from '../screen/AddWebtoon';
 import AddWebtoonChap from '../screen/AddWebtoonChap';
+import EditWebtoon from '../screen/EditWebtoon'
 
 const shareOption = {
   message: 'Link youtube gan',
@@ -44,6 +45,12 @@ const Root = createStackNavigator({
   }, 
   AddWebtoonChap: {
     screen: AddWebtoonChap,
+    navigationOptions: () => ({
+      header: null
+    }),
+  },
+  EditWebtoon: {
+    screen: EditWebtoon,
     navigationOptions: () => ({
       header: null
     }),

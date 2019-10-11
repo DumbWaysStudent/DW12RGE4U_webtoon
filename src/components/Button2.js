@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
     borderTopWidth: 2,
     borderLeftWidth: 2,
-    elevation: 15,
+    elevation: 7,
     marginHorizontal: 30,
   },
   titleButton: {
