@@ -8,7 +8,7 @@ class Details extends Component {
   renderChapter(list) {
     return (
       <View style={styles.containChapter}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('DetailEp')}>
           <Image source={{ uri: list.url }} style={styles.imgChapterStyle} />
         </TouchableOpacity>
         <View style={styles.titleChapter}>

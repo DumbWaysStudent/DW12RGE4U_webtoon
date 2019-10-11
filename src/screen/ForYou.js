@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, FlatList, Image, SafeAreaView } from 'react-native';
+import { View, TouchableOpacity, FlatList, Image, SafeAreaView, ScrollView } from 'react-native';
 import { Text, Item, Input } from 'native-base';
 import Slideshow from 'react-native-image-slider-show';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -68,42 +68,43 @@ export class ForYou extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Item regular style={styles.containSearchStyle}>
-          <Input style={styles.searchStyle} />
-          <TouchableOpacity>
-            <Icon name='search' size={27} color='#403a36' />
-          </TouchableOpacity>
-        </Item>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Item regular style={styles.containSearchStyle}>
+            <Input style={styles.searchStyle} />
+            <TouchableOpacity>
+              <Icon name='search' size={27} color='#403a36' />
+            </TouchableOpacity>
+          </Item>
 
-        <View style={styles.slideShow}>
-          <Slideshow
-            dataSource={this.state.dataSource}
-            position={this.state.position}
-            onPositionChanged={position => this.setState({ position })}
-            height={160}
-          />
-        </View>
+          <View style={styles.slideShow}>
+            <Slideshow
+              dataSource={this.state.dataSource}
+              position={this.state.position}
+              onPositionChanged={position => this.setState({ position })}
+              height={160}
+            />
+          </View>
 
-        <View>
-          <Text style={styles.favHeaderStyle}>Favourite</Text>
-          <FlatList
-            data={banners}
-            renderItem={({ item }) => this.renderFavorite(item)}
-            keyExtractor={item => item.title}
-            horizontal
-          />
-        </View>
+          <View>
+            <Text style={styles.favHeaderStyle}>Favourite</Text>
+            <FlatList
+              data={banners}
+              renderItem={({ item }) => this.renderFavorite(item)}
+              keyExtractor={item => item.title}
+              horizontal
+            />
+          </View>
 
-        <View style={{ flex: 1 }}>
-          <Text style={styles.allHeaderStyle}>All</Text>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={banners}
-            renderItem={({ item }) => this.renderAll(item)}
-            keyExtractor={item => item.title}
-          />
-        </View>
-
+          <View style={{ flex: 1 }}>
+            <Text style={styles.allHeaderStyle}>All</Text>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={banners}
+              renderItem={({ item }) => this.renderAll(item)}
+              keyExtractor={item => item.title}
+            />
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }

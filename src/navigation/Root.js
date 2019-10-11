@@ -16,7 +16,7 @@ import EditWebtoon from '../screen/EditWebtoon';
 import EditWebtoonChap from '../screen/EditWebtoonChap';
 
 const shareOption = {
-  message: 'Link youtube gan',
+  message: 'minta link gan...',
 };
 
 const Root = createStackNavigator({
@@ -84,6 +84,6 @@ const Root = createStackNavigator({
       headerTitle: 'My Webtoon',
     })
   }
-}, { initialRouteName: 'Home' });
+}, { initialRouteName: 'Login' });
 
 export default createAppContainer(Root);
