@@ -48,25 +48,31 @@ export const listChapter = [{
 export const banners = [{
   title: 'Kimetsu No ....',
   url: 'https://i.pinimg.com/originals/96/89/7b/96897b21e4e5becae04e990f17b658ec.jpg',
-  favorite: '58.000.000'
+  favorite: '58.000.000',
+  chapter: '174 Chapter(s)'
 }, {
   title: 'Pasutri Gaje',
   url: 'https://swebtoon-phinf.pstatic.net/20171202_17/1512140898074KBA7B_JPEG/thumb_ipad.jpg',
-  favorite: '4.000.000'
+  favorite: '4.000.000',
+  chapter: '52 Chapter(s)'
 }, {
   title: 'Young Mom',
   url: 'https://cdn.idntimes.com/content-images/community/2019/03/opera-snapshot-2019-03-10-190819-wwwwebtoonscom-aa64078ba943e7895194e96f853d4d20.png',
-  favorite: '14.000.000'
+  favorite: '14.000.000',
+  chapter: '75 Chapter(s)'
 }, {
   title: 'Study Group',
   url: 'https://swebtoon-phinf.pstatic.net/20190502_128/1556776788182u0tYR_JPEG/thumb_ipad.jpg',
-  favorite: '18.000.000'
+  favorite: '18.000.000',
+  chapter: '44 Chapter(s)'
 }, {
   title: 'The Boss',
   url: 'https://vignette.wikia.nocookie.net/webtoon/images/d/d6/SAMPUL_T_BOSS.jpg/revision/latest?cb=20190105104612&path-prefix=id',
-  favorite: '11.000.000'
+  favorite: '11.000.000',
+  chapter: '51 Chapter(s)'
 }, {
   title: 'The Secret of ..',
   url: 'https://akcdn.detik.net.id/community/media/visual/2019/04/03/dac43146-7dd4-49f4-89ca-d81f57b070fc.jpeg?w=770&q=90',
-  favorite: '11.000.000'
+  favorite: '11.000.000',
+  chapter: '89 Chapter(s)'
 }];

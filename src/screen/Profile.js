@@ -13,7 +13,7 @@ class Profile extends Component {
             <Title>Profile</Title>
           </Left>
           <Right style={styles.headerRight}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProfile')}>
               <Icon name='pencil' size={27} color='orange' />
             </TouchableOpacity>
           </Right>
@@ -24,7 +24,7 @@ class Profile extends Component {
         </View>
 
         <View style={styles.buttonList}>
-          <TouchableOpacity style={styles.buttonS}>
+          <TouchableOpacity style={styles.buttonS} onPress={() => this.props.navigation.navigate('MyWebtoon')}>
             <Text style={styles.buttonTitle1}>
               My Webtoon Creation
             </Text>
