@@ -29,7 +29,7 @@ class MyWebtoon extends Component {
           renderItem={({ item }) => this.renderAll(item)}
           keyExtractor={item => item.title}
         />
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity style={styles.addButton} onPress={() => this.props.navigation.navigate('AddWebtoon')}>
           <Icon name='plus-circle' size={50} color='orange' />
         </TouchableOpacity>
       </SafeAreaView>
