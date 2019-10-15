@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, FlatList, Image, SafeAreaView, ScrollView } from 'react-native';
-import { Text, Item, Input } from 'native-base';
+import { Text, Item, Input, Card, CardItem } from 'native-base';
 import Slideshow from 'react-native-image-slider-show';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -40,41 +40,53 @@ export class ForYou extends Component {
 
   renderFavorite(item) {
     return (
-      <View style={styles.favContentStyle}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
-          <Image source={{ uri: item.url }} style={styles.favImgStyle} />
-        </TouchableOpacity>
-        <Text>{item.title}</Text>
+      <View>
+        <Card style={styles.favCard}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
+            <CardItem style={styles.favCardStyle}>
+              <Image source={{ uri: item.url }} style={styles.favImgStyle} />
+            </CardItem>
+          </TouchableOpacity>
+          <CardItem style={styles.favCardTitle}>
+            <Text style={styles.fontTitle}>{item.title}</Text>
+          </CardItem>
+        </Card>
       </View>
     );
   }
 
   renderAll(item) {
     return (
-      <View style={styles.allContentStyle}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
-          <Image source={{ uri: item.url }} style={styles.allImageStyle} />
-        </TouchableOpacity>
-        <View style={styles.allTitle}>
-          <Text>{item.title}</Text>
-          <TouchableOpacity style={styles.buttonFav}>
-            <Text style={styles.buttonFavTitle}>+ Favourite</Text>
+      <Card style={styles.allContentStyle}>
+        <CardItem style={{ flex: 2, backgroundColor: '#f7f7f7'}}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
+            <Image source={{ uri: item.url }} style={styles.allImageStyle} />
           </TouchableOpacity>
-        </View>
-      </View>
+        </CardItem>
+
+        <CardItem style={styles.allTitle}>
+          <Text style={{ alignSelf: 'flex-start', marginBottom: 2 }}>{item.title}</Text>
+          <TouchableOpacity style={styles.buttonFav}>
+            <Text style={[styles.buttonFavTitle, styles.fontTitle]}>+ Favourite</Text>
+          </TouchableOpacity>
+        </CardItem>
+      </Card>
     );
   }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+
+        <View>
           <Item regular style={styles.containSearchStyle}>
             <Input style={styles.searchStyle} />
             <TouchableOpacity>
-              <Icon name='search' size={27} color='#403a36' />
+              <Icon name='search' size={25} color='#fb9224' />
             </TouchableOpacity>
           </Item>
+        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
 
           <View style={styles.slideShow}>
             <Slideshow
@@ -113,72 +125,85 @@ export default ForYou;
 
 const styles = {
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     flex: 1,
-    backgroundColor: 'whitesmoke',
+    backgroundColor: '#fff',
   },
   containSearchStyle: {
     marginTop: 15,
-    borderColor: '#403a36',
+    borderColor: '#fff',
     paddingRight: 20,
-    borderRadius: 3,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    borderLeftWidth: 2,
-    borderRightWidth: 2,
+    borderRadius: 5,
+    backgroundColor: '#eae9e9',
+    marginBottom: 10
   },
   searchStyle: {
     paddingLeft: 15,
     paddingRight: 15
   },
-  favContentStyle: {
-    paddingLeft: 3,
-  },
   favHeaderStyle: {
     marginTop: 15,
     marginLeft: 3,
     fontSize: 23,
-    marginBottom: 3,
+    fontFamily: 'Raleway-Medium',
+  },
+  favCard: {
+    height: 170,
+    width: 140,
+  },
+  favCardItemStyle: {
+    height: null,
+    width: null,
+    alignItems: 'center',
   },
   favImgStyle: {
-    height: 110,
-    width: 110,
-    borderRadius: 2,
-    borderWidth: 2,
-    borderColor: '#403a36',
-    marginBottom: 2,
-    marginRight: 10,
+    height: 125,
+    width: 170,
+    marginTop: -12,
+    flex: 4,
+    marginHorizontal: -17,
+    borderRadius: 2
+  },
+  favCardTitle: {
+    flex: 1,
+    height: null
   },
   allContentStyle: {
     flexDirection: 'row',
-    marginLeft: 3
+    width: 240,
+    height: 80,
+    backgroundColor: '#f7f7f7',
   },
   allHeaderStyle: {
     marginTop: 10,
-    marginLeft: 3,
+    marginLeft: 7,
     fontSize: 23,
     marginBottom: 3,
+    fontFamily: 'Raleway-Medium'
   },
   allImageStyle: {
-    height: 65,
-    width: 65,
-    borderColor: '#403a36',
-    borderWidth: 2,
-    borderRadius: 2,
-    marginBottom: 10
+    height: 76,
+    width: 76,
+    marginLeft: -15,
+    marginTop: -1,
+    borderTopLeftRadius: 2,
+    borderBottomLeftRadius: 2,
   },
   allTitle: {
-    marginLeft: 10,
-    marginTop: 5,
+    flexDirection: 'column',
+    backgroundColor: '#f7f7f7',
+    flex: 6
   },
   buttonFav: {
     backgroundColor: '#fb9224',
     width: 90,
     borderWidth: 1,
-    borderColor: '#403a36',
-    elevation: 1,
+    borderColor: '#fb9224',
+    elevation: 2,
     paddingVertical: 1,
-    marginTop: 4
+    marginTop: 4,
+    borderRadius: 2,
+    alignSelf: 'flex-start'
   },
   buttonFavTitle: {
     fontSize: 13,
@@ -186,8 +211,20 @@ const styles = {
   },
   slideShow: {
     marginTop: 10,
-    borderWidth: 2,
-    borderRadius: 2,
-    marginLeft: 2
+    marginLeft: 2,
+    borderBottomWidth: 2,
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 2,
+    borderColor: '#ddd',
+    elevation: 2,
+    borderRadius: 4,
+    padding: 2,
+  },
+  fontTitle: {
+    fontFamily: 'Raleway-Medium'
+  },
+  allText: {
+    alignItems: 'flex-start'
   }
 };

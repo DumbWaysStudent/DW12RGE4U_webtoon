@@ -1,14 +1,15 @@
 import React from 'react';
 import { Button as CustomButton, Text } from 'native-base';
 
-const Button = ({ onPress, children, styling, disabled }) => {
+const Button = ({ onPress, children, styling, disabled, textStyling }) => {
   return (
     <CustomButton
+      success
       style={[styles.buttonStyle, styling]}
       onPress={onPress}
       disabled={disabled}
     >
-      <Text>{children}</Text>
+    <Text style={[styles.text, textStyling]} >{children}</Text>
     </CustomButton>
   );
 };
@@ -18,7 +19,11 @@ const styles = {
   buttonStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 7,
+    borderRadius: 3,
+    //backgroundColor: '#52de97',
+  },
+  text: {
+    fontFamily: 'Roboto-Bold',
   }
 };
 

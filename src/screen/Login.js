@@ -76,8 +76,9 @@ export default class SignIn extends Component {
           </View>
 
           <View>
-            <Item rounded style={styles.formItem}>
+            <Item regular style={styles.formItem}>
               <Input
+                style={{ fontFamily: 'Roboto-Light' }}
                 value={this.state.email}
                 onChangeText={(text) => this.emailValidation(text)}
                 autoCapitalize='none'
@@ -85,8 +86,9 @@ export default class SignIn extends Component {
                 placeholder='Input your email'
               />
             </Item>
-            <Item rounded style={styles.formItem}>
+            <Item regular style={styles.formItem}>
               <Input
+                style={{ fontFamily: 'Roboto-Light' }}
                 value={this.state.password}
                 onChangeText={(text) => this.passlValidation(text)}
                 autoCapitalize='none'
@@ -130,11 +132,15 @@ const styles = StyleSheet.create({
   subTitle: {
     fontSize: 25,
     marginTop: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Poppins-Black'
   },
   formItem: {
     marginBottom: 20,
     paddingHorizontal: 15,
-    height: 50
+    height: 50,
+    borderRadius: 3,
+    backgroundColor: '#f6f6f6',
+    borderColor: '#f6f6f6'
   }
 });

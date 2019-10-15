@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 const models = require('../models');
 
-const users = models.user;
+const Users = models.user;
 
 exports.login = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  users.findOne({ where: { email, password } }).then(user => {
+  Users.findOne({ where: { email, password } }).then(user => {
     if (user) {
       const token = jwt.sign({ userId: user.id }, 'my-secret-key');
       res.send({
@@ -20,5 +20,16 @@ exports.login = (req, res) => {
         message: 'Wrong'
       });
     }
+  });
+};
+
+exports.register = (req, res) => {
+  Users.create(req.body).then(result => {
+    const token = jwt.sign({ userId: result.id }, 'my-secret-key');
+    res.send({
+      message: 'Register Succes',
+      result,
+      token
+    });
   });
 };
