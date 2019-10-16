@@ -23,8 +23,8 @@ app.group('/api/v1', (router) => {
   // Api Users
   router.get('/users', UserController.index);
 
-  // Api Episodes
-  router.get('/episodes/:id', EpisodeController.show);
+  // Api Episodes berdasarkan id
+  router.get('/webtoons/:id/episode', EpisodeController.show);
 
   // Api Auth
   router.post('/auth', AuthController.login);
@@ -33,4 +33,4 @@ app.group('/api/v1', (router) => {
   router.post('/register', AuthController.register);
 });
 
-app.listen(port, () => console.log(`Server start on port ${port}!`));
+app.listen(port, () => console.log(`Server running on port ${port}!`));
