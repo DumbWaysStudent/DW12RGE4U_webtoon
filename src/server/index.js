@@ -27,7 +27,7 @@ app.group('/api/v1', (router) => {
   router.get('/users', UserController.index);
 
   // Api Episodes berdasarkan id
-  //router.get('/webtoons/:id/episode', EpisodeController.show);
+  router.get('/webtoons/:id/episode', EpisodeController.show);
   
   // Api Auth
   router.post('/auth', AuthController.login);
@@ -39,10 +39,12 @@ app.group('/api/v1', (router) => {
   router.get('/webtoon/:id/episode/:id', ImgEpisodeController.ImgEpsShow);
 
   // Api Webtoon isFavorite
-  router.get('/favorite', ShowFavoriteController.ShowWebtonFavorite); // /favorite/1?isFavorite=true
+  router.get('/favorite', authenticated, ShowFavoriteController.ShowWebtonFavorite); // /favorite/1?isFavorite=true
 
   // Api Search Webtton titlr
-  router.get('/web', WebtoonController.ShowSearchWebtoon); // /webtoons?title=blala
+  router.get('/webtoon', WebtoonController.ShowSearchWebtoon); // /webtoons?title=blala
+
+  router.get('/user/:id/webtoon', authenticated, WebtoonController.ShowWebtoonCreation);
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}!`));

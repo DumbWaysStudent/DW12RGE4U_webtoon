@@ -15,3 +15,10 @@ exports.ShowSearchWebtoon = (req, res) => {
     where: { title: { [Op.like]: `%${cari}%` } }
   }).then(result => res.send(result)); 
 };
+
+exports.ShowWebtoonCreation = (req, res) => {
+  const id = req.params.id;
+  masters.findAll({
+    where: { created_by: id }
+  }).then(result => res.send(result));
+};
