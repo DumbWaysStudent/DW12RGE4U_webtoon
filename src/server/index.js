@@ -6,7 +6,7 @@ const app = express();
 const port = 5000;
 const { authenticated } = require('./middleware');
 
-app.use(bodyParser.json());
+
 // Controller
 const WebtoonController = require('./controller/webtoons');
 const UserController = require('./controller/users');
@@ -15,14 +15,9 @@ const AuthController = require('./controller/auth');
 const ImgEpisodeController = require('./controller/img_episodes');
 const ShowFavoriteController = require('./controller/favorites');
 
-app.group('/api/v1', (router) => {
-  // Api Webtoon
-  // router.get('/webtoons', WebtoonController.index); 
-  // // router.get('/webtoon/:id', WebtoonController.show)    
-  // // router.post('/webtoon', WebtoonController.store)    
-  // // router.patch('/webtoon/:id', WebtoonController.update)    
-  // // router.delete('/webtoon/:id', WebtoonController.delete)
+app.use(bodyParser.json());
 
+app.group('/api/v1', (router) => {
   // Api Users
   router.get('/users', UserController.index);
 
@@ -38,8 +33,8 @@ app.group('/api/v1', (router) => {
   // Api Image Episode Berdasarkan episode 1 atau 2 dst
   router.get('/webtoon/:id/episode/:id', ImgEpisodeController.ImgEpsShow);
 
-  // Api Webtoon isFavorite
-  router.get('/favorite', authenticated, ShowFavoriteController.ShowWebtonFavorite); // /favorite/1?isFavorite=true
+  // Api Webtoon isFavorite pemanggilan /favorite/?isFavorite=true
+  router.get('/favorite', authenticated, ShowFavoriteController.ShowWebtonFavorite);
 
   router.get('/webtoon', WebtoonController.ShowSearchWebtoon); // /webtoons?title=blala
 
@@ -50,6 +45,8 @@ app.group('/api/v1', (router) => {
   router.get('/user/:idUser/webtoon/:idWebtoon', authenticated, WebtoonController.ShowMyCreation);
 
   router.patch('/user/:idUser/webtoon/:id', authenticated, WebtoonController.UpdateMyCreation);
+
+  router.delete('/user/:idUser/webtoon/:id', authenticated, WebtoonController.DeleteMyCreation);
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}!`));

@@ -14,7 +14,7 @@ exports.ShowSearchWebtoon = (req, res) => {
   console.log(cari);
   masters.findAll({
     where: { title: { [Op.like]: `%${cari}%` } }
-  }).then(result => res.send(result)); 
+  }).then(result => res.send(result));
 };
 
 // Show Webtoon Berdasarkan Created By
@@ -42,4 +42,15 @@ exports.UpdateMyCreation = (req, res) => {
     req.body,
     { where: { created_by: req.params.idUser, id: req.params.id } }
   ).then(res.send(req.body));
+};
+
+// Delete Webtoon berdasarkan webtoon yang dibuat oleh Createdby
+exports.DeleteMyCreation = (req, res) => {
+  masters.destroy(
+    { where: { created_by: req.params.idUser, id: req.params.id } }).then(result => {
+      res.send({
+        message: 'Delete Successfully',
+        result
+      });
+    });
 };
