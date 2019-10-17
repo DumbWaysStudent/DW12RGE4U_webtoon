@@ -1,18 +1,15 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('masters', {
+    return queryInterface.createTable('img_episodes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
-      },
-      genre: {
-        type: Sequelize.STRING
+      page: {
+        type: Sequelize.INTEGER
       },
       image: {
         type: Sequelize.STRING
@@ -22,6 +19,26 @@ module.exports = {
         allowNull: false,
         references: {
             model: 'users',
+            key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
+      },
+      masters_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'masters',
+            key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
+      },
+      episodes_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'episodes',
             key: 'id'
         },
         onUpdate: 'cascade',
@@ -38,6 +55,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('masters');
+    return queryInterface.dropTable('img_episodes');
   }
 };

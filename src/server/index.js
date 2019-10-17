@@ -30,9 +30,6 @@ app.group('/api/v1', (router) => {
   // Api Register User
   router.post('/register', AuthController.register);
 
-  // Api Image Episode Berdasarkan episode 1 atau 2 dst
-  router.get('/webtoon/:id/episode/:id', ImgEpisodeController.ImgEpsShow);
-
   // Api Webtoon isFavorite pemanggilan /favorite/?isFavorite=true
   router.get('/favorite', authenticated, ShowFavoriteController.ShowWebtonFavorite);
 
@@ -47,6 +44,14 @@ app.group('/api/v1', (router) => {
   router.patch('/user/:idUser/webtoon/:id', authenticated, WebtoonController.UpdateMyCreation);
 
   router.delete('/user/:idUser/webtoon/:id', authenticated, WebtoonController.DeleteMyCreation);
+
+  router.post('/user/:idUser/webtoon/:idWb', authenticated, EpisodeController.CreateMyEpisode);
+
+  // Api Image Episode Berdasarkan webtoon dan episode 
+  router.get('/webtoon/:idM/episode/:idE', ImgEpisodeController.ShowImgEps);
+
+  // Api Image Episode Berdasarkan webtoon dan episode 
+  router.get('/user/:idU/webtoon/:idM/episode/:idE', authenticated, ImgEpisodeController.ShowCreationImgEps);
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}!`));

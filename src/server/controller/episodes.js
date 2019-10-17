@@ -9,5 +9,20 @@ exports.index = (req, res) => {
 //tampil episode berdasarkan id_master
 exports.show = (req, res) => {
   const id = req.params.id;
-  Episodes.findAll({ where: { id_masters: id } }).then(result => res.send(result));
+  Episodes.findAll({ where: { masters_id: id } }).then(result => res.send(result));
+};
+
+exports.CreateMyEpisode = (req, res) => {
+  const { title, image } = req.body;
+  Episodes.create({ 
+      title,
+      image,
+      masters_id: req.params.idWb,
+      created_by: req.params.idUser
+    }).then(result => {
+      res.send({
+        message: 'Add Episode Succesfully',
+        result
+      });
+    });
 };

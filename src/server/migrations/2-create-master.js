@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('episodes', {
+    return queryInterface.createTable('masters', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,14 +11,17 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      genre: {
+        type: Sequelize.STRING
+      },
       image: {
         type: Sequelize.STRING
       },
-      id_masters: {
+      created_by: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'masters',
+            model: 'users',
             key: 'id'
         },
         onUpdate: 'cascade',
@@ -35,6 +38,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('episodes');
+    return queryInterface.dropTable('masters');
   }
 };
