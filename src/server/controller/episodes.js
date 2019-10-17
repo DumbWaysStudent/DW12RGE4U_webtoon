@@ -26,3 +26,10 @@ exports.CreateMyEpisode = (req, res) => {
       });
     });
 };
+
+exports.UpdateMyEpisode = (req, res) => {
+  Episodes.update(
+    req.body,
+    { where: { created_by: req.params.idU, masters_id: req.params.idM, id: req.params.id } }
+  ).then(res.send(req.body));
+};

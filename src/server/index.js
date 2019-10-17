@@ -52,6 +52,8 @@ app.group('/api/v1', (router) => {
 
   // Api Image Episode Berdasarkan webtoon dan episode 
   router.get('/user/:idU/webtoon/:idM/episode/:idE', authenticated, ImgEpisodeController.ShowCreationImgEps);
+
+  router.patch('/user/:idU/webtoon/:idM/episode/:id', authenticated, EpisodeController.UpdateMyEpisode);
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}!`));
