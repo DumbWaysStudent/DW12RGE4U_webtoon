@@ -36,3 +36,10 @@ exports.ShowMyCreation = (req, res) => {
     .then(result => res.send(result));
 };
 
+// Update Webtoon Oleh User CreatedBy
+exports.UpdateMyCreation = (req, res) => {
+  masters.update(
+    req.body,
+    { where: { created_by: req.params.idUser, id: req.params.id } }
+  ).then(res.send(req.body));
+};

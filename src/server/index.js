@@ -48,6 +48,8 @@ app.group('/api/v1', (router) => {
   router.post('/user/:id/webtoon', authenticated, WebtoonController.StoreMyCreation);
 
   router.get('/user/:idUser/webtoon/:idWebtoon', authenticated, WebtoonController.ShowMyCreation);
+
+  router.patch('/user/:idUser/webtoon/:id', authenticated, WebtoonController.UpdateMyCreation);
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}!`));
