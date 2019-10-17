@@ -41,10 +41,13 @@ app.group('/api/v1', (router) => {
   // Api Webtoon isFavorite
   router.get('/favorite', authenticated, ShowFavoriteController.ShowWebtonFavorite); // /favorite/1?isFavorite=true
 
-  // Api Search Webtton titlr
   router.get('/webtoon', WebtoonController.ShowSearchWebtoon); // /webtoons?title=blala
 
   router.get('/user/:id/webtoon', authenticated, WebtoonController.ShowWebtoonCreation);
+
+  router.post('/user/:id/webtoon', authenticated, WebtoonController.StoreMyCreation);
+
+  router.get('/user/:idUser/webtoon/:idWebtoon', authenticated, WebtoonController.ShowMyCreation);
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}!`));

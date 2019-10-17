@@ -3,6 +3,7 @@ const models = require('../models');
 const ImgEpisodes = models.img_episode;
 const Episodes = models.episode;
 
+// Show Page episode berdasarkan episode
 exports.ImgEpsShow = (req, res) => {
   Episodes.findOne({ where: { id_masters: req.params.id } }).then(episode => {
     ImgEpisodes.findAll({

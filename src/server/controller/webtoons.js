@@ -8,6 +8,7 @@ exports.index = (req, res) => {
   masters.findAll().then(result => res.send(result));
 };
 
+// Search Webtoon berdsarkan title
 exports.ShowSearchWebtoon = (req, res) => {
   const cari = req.query.title;
   console.log(cari);
@@ -16,9 +17,22 @@ exports.ShowSearchWebtoon = (req, res) => {
   }).then(result => res.send(result)); 
 };
 
+// Show Webtoon Berdasarkan Created By
 exports.ShowWebtoonCreation = (req, res) => {
   const id = req.params.id;
   masters.findAll({
     where: { created_by: id }
   }).then(result => res.send(result));
 };
+
+// Add Webtoon Oleh User CreatedBy
+exports.StoreMyCreation = (req, res) => {
+  masters.create(req.body).then(result => res.send(result));
+};
+
+// Show Webtoon berdasrkan user dan webtoon yang telah dibuat
+exports.ShowMyCreation = (req, res) => {
+  masters.findAll({ where: { created_by: req.params.idUser, id: req.params.idWebtoon } })
+    .then(result => res.send(result));
+};
+

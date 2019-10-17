@@ -3,6 +3,7 @@ const models = require('../models');
 
 const Users = models.user;
 
+// Login Berdasrkan username dan password
 exports.login = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;

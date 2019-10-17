@@ -3,6 +3,7 @@ const models = require('../models');
 const Favorites = models.favourite;
 const Masters = models.master;
 
+// Show webtoon is favorite = true
 exports.ShowWebtonFavorite = (req, res) => {
   const favorite = req.query.isFavorite;
   if (favorite == 'true') {
