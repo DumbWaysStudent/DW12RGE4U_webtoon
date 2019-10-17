@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
   const master = sequelize.define('master', {
     title: DataTypes.STRING,
     genre: DataTypes.STRING,
-    isFavorite: DataTypes.INTEGER,
     image: DataTypes.STRING,
     created_by: DataTypes.INTEGER
   }, {});

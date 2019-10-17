@@ -9,7 +9,7 @@ exports.login = (req, res) => {
 
   Users.findOne({ where: { email, password } }).then(user => {
     if (user) {
-      const token = jwt.sign({ userId: user.id }, 'my-secret-key');
+      const token = `Bearer ${jwt.sign({ userId: user.id }, 'my-secret-key')}`;
       res.send({
         user,
         token

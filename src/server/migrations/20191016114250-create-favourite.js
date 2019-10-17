@@ -1,31 +1,35 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('masters', {
+    return queryInterface.createTable('favourites', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
-      },
-      genre: {
-        type: Sequelize.STRING
-      },
-      image: {
-        type: Sequelize.STRING
-      },
-      created_by: {
+      id_users: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'users',
-            key: 'id'
+          model: 'users',
+          key: 'id'
         },
         onUpdate: 'cascade',
         onDelete: 'cascade'
+      },
+      id_masters: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'masters',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
+      },
+      is_favorite: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +42,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('masters');
+    return queryInterface.dropTable('favourites');
   }
 };
