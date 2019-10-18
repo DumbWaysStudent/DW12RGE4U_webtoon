@@ -49,3 +49,19 @@ exports.StoreImgEpisode = (req, res) => {
   });
 };
 
+exports.DeleteImgEpisode = (req, res) => {
+  ImgEpisodes.destroy({
+    where: {
+      created_by: req.params.idU,
+      masters_id: req.params.idM,
+      episodes_id: req.params.idE,
+      id: req.params.id
+    }
+  }).then(result => {
+    res.send({
+      message: 'Delete Image Episode Successfully',
+      result
+    });
+  });
+};
+
