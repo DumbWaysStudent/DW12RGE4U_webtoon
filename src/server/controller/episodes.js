@@ -33,3 +33,15 @@ exports.UpdateMyEpisode = (req, res) => {
     { where: { created_by: req.params.idU, masters_id: req.params.idM, id: req.params.id } }
   ).then(res.send(req.body));
 };
+
+exports.DeleteEpisode = (req, res) => {
+  Episodes.destroy({
+    where: { created_by: req.params.idU, masters_id: req.params.idM, id: req.params.id  }
+  }).then(result => {
+    res.send({
+      message: 'Delete episode successfully',
+      result
+    });
+  });
+};
+
