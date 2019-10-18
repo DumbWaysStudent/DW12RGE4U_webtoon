@@ -56,6 +56,8 @@ app.group('/api/v1', (router) => {
   router.patch('/user/:idU/webtoon/:idM/episode/:id', authenticated, EpisodeController.UpdateMyEpisode);
 
   router.delete('/user/:idU/webtoon/:idM/episode/:id', authenticated, EpisodeController.DeleteEpisode);
+
+  router.post('/user/:idU/webtoon/:idM/episode/:idE/image', authenticated, ImgEpisodeController.StoreImgEpisode);
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}!`));

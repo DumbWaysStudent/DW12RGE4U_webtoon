@@ -33,3 +33,19 @@ exports.ShowCreationImgEps = (req, res) => {
   }).then(result => res.send(result));
 };
 
+exports.StoreImgEpisode = (req, res) => {
+  const { page, image } = req.body;
+  ImgEpisodes.create({
+    page,
+    image,
+    created_by: req.params.idU,
+    masters_id: req.params.idM,
+    episodes_id: req.params.idE
+  }).then(result => {
+    res.send({
+      message: 'Add Image Episode Successfully',
+      result
+    });
+  });
+};
+
