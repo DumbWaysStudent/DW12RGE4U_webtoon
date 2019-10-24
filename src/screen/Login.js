@@ -4,15 +4,19 @@ import {
   View, StyleSheet,
   Image,
   KeyboardAvoidingView,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage,
+  ActivityIndicator
 } from 'react-native';
 import { Item, Input, Text } from 'native-base';
 import { StackActions, NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import * as actionLogin from './../redux/actions/actionLogin';
 import Button from './../components/Button';
 
-export default class SignIn extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,8 +25,14 @@ export default class SignIn extends Component {
       icon: 'eye',
       eyePassword: true,
       isMailValid: false,
-      isPassValid: false
+      isPassValid: false,
+      loading: false
     };
+  }
+
+  // eslint-disable-next-line no-undef
+  componentDidMount = async () => {
+    await this.props.getLogin();
   }
 
   handleEye() {
@@ -58,15 +68,42 @@ export default class SignIn extends Component {
     return true;
   }
 
-  handleLogin() {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Home' })],
-    });
-    this.props.navigation.dispatch(resetAction);
+
+  async handleLogin() {
+    await this.setState({ loading: true });
+    const { email, password } = this.state;
+    await this.props.getLogin(email, password);
+    const users = this.props.loginLocal.auth;
+    if (users.token) {
+      await AsyncStorage.multiSet([
+        ['token', users.token],
+        ['userId', `${users.user.id}`],
+        ['name', users.user.name]
+      ]);
+      const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Home' })],
+      });
+      this.props.navigation.dispatch(resetAction);
+    } else {
+      this.setState({ loading: false });
+      alert('Email or Password is Wrong');
+    }
+  }
+
+  renderButton() {
+    if (this.state.loading) {
+      return <ActivityIndicator size='large' />;
+    }
+    return (
+      <Button
+        disabled={this.buttonValidation(this.state.isMailValid, this.state.isPassValid)}
+        onPress={() => this.handleLogin()}>Log In</Button>
+    );
   }
 
   render() {
+    console.disableYellowBox = true;
     return (
       <SafeAreaView>
         <KeyboardAvoidingView behavior='position' style={styles.container}>
@@ -99,19 +136,31 @@ export default class SignIn extends Component {
               <TouchableOpacity onPress={() => this.handleEye()}>
                 <Icon name={this.state.icon} size={25} color='#000' />
               </TouchableOpacity>
-
             </Item>
-            <Button
-              disabled={this.buttonValidation(this.state.isMailValid, this.state.isPassValid)}
-              onPress={() => this.handleLogin()}
-            >Log In</Button>
+            {this.renderButton()}
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>
-
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    loginLocal: state.login // reducers/index.js samain yah bang
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getLogin: (email, password) => dispatch(actionLogin.handleActionLogin(email, password)) // action yah bang
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
 
 const styles = StyleSheet.create({
   container: {

@@ -21,8 +21,10 @@ app.group('/api/v1', (router) => {
   // Api Users
   router.get('/users', UserController.index);
 
-  // Api Episodes berdasarkan id
-  router.get('/webtoons/:id/episode', EpisodeController.show);
+  router.get('/webtoon/:idW/episode', EpisodeController.showEpisode);
+
+  // Api Episodes berdasarkan id webtoon dan user
+  router.get('/user/:idU/webtoon/:idW/episode', EpisodeController.show);
   
   // Api Auth
   router.post('/auth', AuthController.login);
@@ -32,6 +34,8 @@ app.group('/api/v1', (router) => {
 
   // Api Webtoon isFavorite pemanggilan /favorite/?isFavorite=true
   router.get('/favorite', authenticated, ShowFavoriteController.ShowWebtonFavorite);
+
+  router.get('/webtoons', WebtoonController.index);
 
   router.get('/webtoon', WebtoonController.ShowSearchWebtoon); // /webtoons?title=blala
 
@@ -45,7 +49,7 @@ app.group('/api/v1', (router) => {
 
   router.delete('/user/:idUser/webtoon/:id', authenticated, WebtoonController.DeleteMyCreation);
 
-  router.post('/user/:idUser/webtoon/:idWb', authenticated, EpisodeController.CreateMyEpisode);
+  router.post('/user/:idUser/webtoon/:idWb/episode', authenticated, EpisodeController.CreateMyEpisode);
 
   // Api Image Episode Berdasarkan webtoon dan episode 
   router.get('/webtoon/:idM/episode/:idE', ImgEpisodeController.ShowImgEps);

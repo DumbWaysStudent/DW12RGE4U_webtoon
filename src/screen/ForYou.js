@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, FlatList, Image, SafeAreaView, ScrollView } from 'react-native';
 import { Text, Item, Input, Card, CardItem } from 'native-base';
+import { connect } from 'react-redux';
 import Slideshow from 'react-native-image-slider-show';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import { banners } from '../components/Link';
+
+import * as actionWebtoon from './../redux/actions/actionWebtoon';
 
 export class ForYou extends Component {
   constructor(props) {
@@ -13,17 +15,11 @@ export class ForYou extends Component {
     this.state = {
       position: 1,
       interval: null,
-      dataSource: [
-        {
-          url: 'https://3.bp.blogspot.com/-DZA0DTCWPlk/XM4zp5rf4CI/AAAAAAAAApk/gwJBzi0DPMwOl6rOBHpue_TXbnB0_0AGwCLcBGAs/w1200-h630-p-k-no-nu/Pasutri%2BGaje%2BSeason%2B2%2BAnissa%2BNisfihani%2BWebtoon%2BIndonesia.JPG',
-        }, {
-          url: 'https://swebtoon-phinf.pstatic.net/20190502_128/1556776788182u0tYR_JPEG/thumb_ipad.jp',
-        }, {
-          url: 'https://cdn.idntimes.com/content-images/community/2019/03/opera-snapshot-2019-03-10-190819-wwwwebtoonscom-aa64078ba943e7895194e96f853d4d20.png'
-        }],
+      dataSource: []
     };
   }
 
+  
   componentWillMount() {
     this.setState({
       interval: setInterval(() => {
@@ -32,6 +28,12 @@ export class ForYou extends Component {
         });
       }, 3000)
     });
+  }
+
+  // eslint-disable-next-line no-undef
+  componentDidMount = async () => {
+    await this.props.getWebtoon();
+    this.setState({ dataSource: this.props.webtoonLocal.web });
   }
 
   componentWillUnmount() {
@@ -59,8 +61,8 @@ export class ForYou extends Component {
     return (
       <Card style={styles.allContentStyle}>
         <CardItem style={{ flex: 2, backgroundColor: '#f7f7f7'}}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
-            <Image source={{ uri: item.url }} style={styles.allImageStyle} />
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail', { titleHome: item.title, imageHome: item.image, idWebtoon: item.id })}>
+            <Image source={{ uri: item.image }} style={styles.allImageStyle} />
           </TouchableOpacity>
         </CardItem>
 
@@ -75,6 +77,7 @@ export class ForYou extends Component {
   }
 
   render() {
+    console.disableYellowBox = true;
     return (
       <SafeAreaView style={styles.container}>
 
@@ -93,7 +96,7 @@ export class ForYou extends Component {
               dataSource={this.state.dataSource}
               position={this.state.position}
               onPositionChanged={position => this.setState({ position })}
-              height={160}
+              height={170}
             />
           </View>
 
@@ -111,7 +114,7 @@ export class ForYou extends Component {
             <Text style={styles.allHeaderStyle}>All</Text>
             <FlatList
               showsVerticalScrollIndicator={false}
-              data={banners}
+              data={this.props.webtoonLocal.web}
               renderItem={({ item }) => this.renderAll(item)}
               keyExtractor={item => item.title}
             />
@@ -121,7 +124,23 @@ export class ForYou extends Component {
     );
   }
 }
-export default ForYou;
+
+const mapStateToProps = state => {
+  return {
+    webtoonLocal: state.webtoon // reducers/index.js samain yah bang
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getWebtoon: () => dispatch(actionWebtoon.handleGetWebtoon()) // action yah bang
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ForYou);
 
 const styles = {
   container: {
@@ -131,11 +150,12 @@ const styles = {
   },
   containSearchStyle: {
     marginTop: 15,
-    borderColor: '#fff',
+    borderColor: '#eae9e9',
     paddingRight: 20,
     borderRadius: 5,
     backgroundColor: '#eae9e9',
-    marginBottom: 10
+    marginBottom: 10,
+    borderWidth: 5
   },
   searchStyle: {
     paddingLeft: 15,
@@ -170,7 +190,7 @@ const styles = {
   },
   allContentStyle: {
     flexDirection: 'row',
-    width: 240,
+    width: '98%',
     height: 80,
     backgroundColor: '#f7f7f7',
   },
@@ -206,7 +226,7 @@ const styles = {
     alignSelf: 'flex-start'
   },
   buttonFavTitle: {
-    fontSize: 13,
+    fontSize: 12,
     textAlign: 'center',
   },
   slideShow: {
